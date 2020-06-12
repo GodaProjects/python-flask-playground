@@ -45,6 +45,7 @@ def index():
         return render_template('index.html', data=data)
 
 
+@app.route('/friend/', methods=['GET'])
 @app.route('/friend', methods=['GET'])
 def friend():
     data = Friends.query.order_by(Friends.date).all()
@@ -52,6 +53,7 @@ def friend():
     for item in data:
         data_lst.append(
             {
+                'id': item.id,
                 'name': item.name,
                 'date': item.date.date()
             }
@@ -59,6 +61,44 @@ def friend():
     # It can be named anything not essentially response.
     response = jsonify(data_lst)
     response.status_code = 200
+    return response
+
+
+@app.route('/friend/<int:id>', methods=['GET'])
+def friend_by_id(id):
+    data_lst = []
+    status = 200
+
+    if(id is None):
+        data_lst.append(
+            {
+                'msg': 'No data found with id ' + str(id)
+            }
+        )
+        status = 404
+    else:
+        data = Friends.query.get(id)
+        print(data)
+
+        if(data is None):
+            data_lst.append(
+                {
+                    'msg': 'No data found with id ' + str(id)
+                }
+            )
+            status = 404
+        else:
+            data_lst.append(
+                {
+                    'id': data.id,
+                    'name': data.name,
+                    'date': data.date.date()
+                }
+            )
+
+    # It can be named anything not essentially response.
+    response = jsonify(data_lst)
+    response.status_code = status
     return response
 
 
