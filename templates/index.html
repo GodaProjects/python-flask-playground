@@ -1,17 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Goda's Flask Playground</title>
-    <style>
-        body {
-            font-family: 'Courier New', Courier, monospace;
-        }
-    </style>
-</head>
+{% extends 'base.html' %}
 
-<body>
-    <h1>Goda says hello!</h1>
-</body>
-</html>
+{% block head %}
+<title>Goda's Flask</title>
+{% endblock %}
+
+{% 
+    block body 
+%}
+<h1>Goda says hello from jinja2!</h1>
+{% 
+    endblock 
+%}
+
