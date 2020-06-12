@@ -1,14 +1,49 @@
-{% extends 'base.html' %}
-
-{% block head %}
+{% extends 'base.html' %} {% block head %}
 <title>Goda's Flask</title>
-{% endblock %}
-
-{% 
-    block body 
-%}
+{% endblock %} {% block body %}
 <h1>Goda says hello from jinja2!</h1>
-{% 
-    endblock 
-%}
+<h3>Database Adder</h3>
+<div class="database"></div>
+<form id="database" action="/" method="POST">
+    <table>
+        <thead>
+          <td>
+            Name
+          </td>
+          <td>
+              Operation
+            </td>
+        </thead>
+        <tbody>
+            <td><input name="name"></td>
+            <td><a href="#" id="add">Add</a></td>
+        </tbody>
+        </table>
+      </table>
+</form>
+<h3>Available data</h3>
+<table style="border-width:1px;border-style: solid;">
+    <thead >
+       <tr >
+        <td>
+            Name
+        </td>
+        <td>
+            Date
+        </td>  
+    </tr> 
+    </thead>
+    
+    <tbody >
+        <tr>
+        {% for item in data %}
+        <td>{{item.name}}</td>
+        <td>{{item.date.date()}}</td>
+        {% endfor %}        
+        </tr>
+    </tbody>
+    </table>
+  </table>
 
+<script src="{{url_for('static', filename='js/scripts.js')}}"></script>
+{% endblock %}
