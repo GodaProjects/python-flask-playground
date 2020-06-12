@@ -40,3 +40,5 @@ source goda-flask/bin/activate
 from app import db
 db.create_all()
 ```
+
+9. After this follow the code for html route, json service route, database operations via python, etc, etc.
